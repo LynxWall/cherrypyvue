@@ -1,0 +1,2 @@
+webpack: webpack --watch -d --config ./webpack.config.js
+cherryPy: python ./bin/cherryPyServer.py
