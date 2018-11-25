@@ -1,4 +1,3 @@
-const webpack = require('webpack');
 const path = require('path');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -14,6 +13,15 @@ const config = {
     },
     module: {
         rules: [
+            {
+                enforce: 'pre',
+                test: /\.(js|vue)$/,
+                exclude: /node_modules/,
+                loader: 'eslint-loader',
+                options: {
+                    formatter: require('eslint-friendly-formatter')
+                }
+            },
             {
                 test: /\.scss$/,
                 use: ['vue-style-loader', 'css-loader', 'sass-loader']
@@ -69,6 +77,7 @@ const config = {
         splitChunks: {
             cacheGroups: {
                 vendor: {
+                    // eslint-disable-next-line no-useless-escape
                     test: /[\\\/]node_modules[\\\/]/,
                     name: 'vendors',
                     chunks: 'all'
